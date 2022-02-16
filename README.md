@@ -43,13 +43,13 @@ chat.addEventListener('DOMNodeInserted', function(evt) {
   const nick = li.querySelector('.Barrage-nickName').title;
   let textNode = li.querySelector('.Barrage-content');
   if (!textNode) {
-  	textNode = li.querySelector('.Barrage-text');
+    textNode = li.querySelector('.Barrage-text');
   }
   const text = textNode.innerText;
-  
+
   const room = '';
   const title = '';
-  
+
   var xhr = new XMLHttpRequest();
   xhr.open('POST', 'http://localhost:8888/chat/douyu', true);
   xhr.setRequestHeader('Content-Type', 'application/json');
@@ -76,10 +76,10 @@ document
         }
       }
     }
-  
-  	const room = document.querySelector('.live-user .live-user-name').innerText.trim();
-  	const title = '';
-  
+
+    const room = document.querySelector('.live-user .live-user-name').innerText.trim();
+    const title = '';
+
     var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8888/chat/kuaishou', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
@@ -92,13 +92,13 @@ document
 document
   .querySelector('.chat-room .list-wrapper')
   .addEventListener('DOMNodeInserted', function (evt) {
-		const item = evt.srcElement;
-  	const nick = item.querySelector('.name').innerText;
-  	const text = item.querySelector('.text').innerText;
-  	const title = document.querySelector('.competition-info .title').innerText.trim();
-  	const room = '';
-  
-  	var xhr = new XMLHttpRequest();
+    const item = evt.srcElement;
+    const nick = item.querySelector('.name').innerText;
+    const text = item.querySelector('.text').innerText;
+    const title = document.querySelector('.competition-info .title').innerText.trim();
+    const room = '';
+
+    var xhr = new XMLHttpRequest();
     xhr.open('POST', 'http://localhost:8888/chat/migu', true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify({ room, title, nick, text }));
@@ -107,23 +107,23 @@ document
 
 #### afreecatv
 ```js
-const chat = document.querySelector('#chat_area');
+document
+  .querySelector('#chat_area')
+  .addEventListener('DOMNodeInserted', function(event) {
+    const dl = event.srcElement;
+    const dt = dl.querySelector('dt');
+    const dd = dl.querySelector('dd');
+    const nick = dt.innerText.replace(/\s?\s*$/, '');
+    const text = dd.innerHTML;
 
-chat.addEventListener('DOMNodeInserted', function(event) {
-  const dl = event.srcElement;
-  const dt = dl.querySelector('dt');
-  const dd = dl.querySelector('dd');
-  const nick = dt.innerText.replace(/\s?\s*$/, '');
-  const text = dd.innerHTML;
+    const bc = document.querySelector('.broadcast_information');
 
-  const bc = document.querySelector('.broadcast_information');
+    const room = bc.querySelector('.text_information .nickname').title;
+    const title = bc.querySelector('.text_information .broadcast_title').innerText;
 
-  const room = bc.querySelector('.text_information .nickname').title;
-  const title = bc.querySelector('.text_information .broadcast_title').innerText;
-
-  var xhr = new XMLHttpRequest();
-  xhr.open('POST', 'http://localhost:8888/chat/afreecatv', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.send(JSON.stringify({ room, title, nick, text }));
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:8888/chat/afreecatv', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.send(JSON.stringify({ room, title, nick, text }));
 }, false)
 ```
