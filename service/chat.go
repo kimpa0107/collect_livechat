@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"livechat/model"
+	"livechat/utils/color"
 	"os"
 	"regexp"
 	"strings"
@@ -59,7 +60,15 @@ func (s *Chat) writeToFile(platform string, chat chatRequest) {
 	defer f.Close()
 
 	dt := time.Now().Format("15:04:05")
-	fmt.Printf("\033[34m[%s]\033[0m \033[36m%s\033[0m \033[33m%s\033[0m \033[32m->\033[0m %s\n", dt, room, chat.Nick, pureText(platform, chat.Text))
+
+	fmt.Printf("%s %s %s %s %s %s\n",
+		color.PrintWith("["+dt+"]", color.TEXT_BLUE),
+		color.PrintWith(platform, color.TEXT_GREEN),
+		color.PrintWith(room, color.TEXT_CYAN),
+		color.PrintWith(chat.Nick, color.TEXT_YELLOW),
+		color.PrintWith("->", color.TEXT_GREEN),
+		pureText(platform, chat.Text))
+
 	_, _ = f.WriteString(fmt.Sprintf("[%s] %s -> %s\n", dt, chat.Nick, pureText(platform, chat.Text)))
 }
 
