@@ -33,7 +33,7 @@ func (s *Chat) Write(platform string) gin.HandlerFunc {
 		var chat chatRequest
 		_ = ctx.ShouldBind(&chat)
 		s.writeToFile(platform, chat)
-		s.writeToDB(platform, chat)
+		go s.writeToDB(platform, chat)
 	}
 }
 
