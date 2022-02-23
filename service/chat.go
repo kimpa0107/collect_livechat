@@ -2,8 +2,6 @@ package service
 
 import (
 	"fmt"
-	"livechat/model"
-	"livechat/utils/color"
 	"os"
 	"regexp"
 	"strings"
@@ -11,6 +9,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
+
+	"livechat/model"
+	"livechat/utils/color"
 )
 
 type chatRequest struct {

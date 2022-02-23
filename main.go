@@ -3,13 +3,14 @@ package main
 import (
 	"flag"
 	"fmt"
+
+	"github.com/gin-gonic/gin"
+
 	"livechat/config"
 	"livechat/global"
 	"livechat/initial"
 	"livechat/middleware"
 	"livechat/service"
-
-	"github.com/gin-gonic/gin"
 )
 
 var port int

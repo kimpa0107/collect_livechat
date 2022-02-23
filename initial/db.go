@@ -2,8 +2,6 @@ package initial
 
 import (
 	"fmt"
-	"livechat/config"
-	"livechat/global"
 	"log"
 	"os"
 	"time"
@@ -12,6 +10,9 @@ import (
 	"gorm.io/gorm"
 	"gorm.io/gorm/logger"
 	"gorm.io/gorm/schema"
+
+	"livechat/config"
+	"livechat/global"
 )
 
 func DB(cfg config.MySQL) {
