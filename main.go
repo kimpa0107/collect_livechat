@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"livechat/config"
 	"livechat/global"
@@ -11,7 +12,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func main() {
+var port int
+
+func init() {
+	flag.IntVar(&port, "port", 8888, "listen port")
+
 	initial.DB(config.MySQL{
 		Host: "localhost",
 		Port: "3306",
@@ -19,6 +24,10 @@ func main() {
 		Pass: "root",
 		Name: "livechat",
 	})
+}
+
+func main() {
+	flag.Parse()
 
 	r := gin.Default()
 	r.Use(middleware.Cors())
@@ -33,5 +42,5 @@ func main() {
 		}
 	}
 
-	r.Run(":8888")
+	r.Run(fmt.Sprintf(":%d", port))
 }
