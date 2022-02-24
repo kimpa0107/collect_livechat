@@ -13,10 +13,14 @@ import (
 	"livechat/service"
 )
 
-var port int
+var (
+	port  int
+	debug bool
+)
 
 func init() {
 	flag.IntVar(&port, "port", 8888, "listen port")
+	flag.BoolVar(&debug, "debug", false, "debug mode")
 
 	initial.DB(config.MySQL{
 		Host: "localhost",
@@ -29,6 +33,10 @@ func init() {
 
 func main() {
 	flag.Parse()
+
+	if !debug {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	r := gin.Default()
 	r.Use(middleware.Cors())
